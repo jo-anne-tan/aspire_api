@@ -2,7 +2,7 @@
 <<<<<<< HEAD
 # Jo-Anne was here
 # dan as well
-#lerrickdau
+
 =======
 
 Hello World
