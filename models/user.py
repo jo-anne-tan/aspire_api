@@ -20,12 +20,6 @@ class User(BaseModel,UserMixin):
             if not (self.password[0:19] == "pbkdf2:sha256:50000"): # if password is not changed
                 self.password_check()
 
-    def duplicate_check(self):
-        duplicate_email =  User.get_or_none(User.email==self.email)
-
-        if duplicate_email:
-            if not duplicate_email.id==self.id: #if the id is not your own
-                self.errors.append("Email is already taken. Please try again.")
 
     def password_check(self):
         error_flag = False
