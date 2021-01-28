@@ -13,12 +13,12 @@ class User(BaseModel,UserMixin):
     password=pw.CharField(null=True)
 
     # validations
-     def validate(self):
+    def validate(self):
         self.duplicate_check()
 
         if self.password:
             if not (self.password[0:19] == "pbkdf2:sha256:50000"): # if password is not changed
-                self.password_check() 
+                self.password_check()
 
     def duplicate_check(self):
         duplicate_email =  User.get_or_none(User.email==self.email)
