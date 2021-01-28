@@ -1,4 +1,5 @@
 from flask import Blueprint, flash, render_template,request,redirect,url_for,session,abort
+from models.tutor import Tutor
 
 tutors_blueprint = Blueprint('tutors',
                             __name__,
@@ -10,6 +11,7 @@ def new():
 
 @tutors_blueprint.route('/create', methods=['POST'])
 def create():
+    # Note: request.form["female"] is radio input type
     # request.form["female"] returns True if select, 
     # else it returns error
     try:
@@ -27,8 +29,8 @@ def create():
     )
 
     if new_tutor.save():
-        flash("Student created!")
+        flash("Tutor created!")
         return redirect(url_for('home'))
     else:
-        flash("Error creating student!")
+        flash("Unable to create Tutor!")
         return render_template('home.html', errors = new_student.errors)
