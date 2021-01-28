@@ -5,9 +5,9 @@ from models.base_model import db
 
 
 web_dir = os.path.join(os.path.dirname(
-    os.path.abspath(__file__)), 'instagram_web')
+    os.path.abspath(__file__)), 'aspire_web')
 
-app = Flask('NEXTAGRAM', root_path=web_dir)
+app = Flask('Aspire', root_path=web_dir)
 
 if os.getenv('FLASK_ENV') == 'production':
     app.config.from_object("config.ProductionConfig")
