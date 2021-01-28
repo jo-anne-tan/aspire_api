@@ -3,7 +3,6 @@ import config
 from flask import Flask
 from models.base_model import db
 
-
 web_dir = os.path.join(os.path.dirname(
     os.path.abspath(__file__)), 'aspire_web')
 
