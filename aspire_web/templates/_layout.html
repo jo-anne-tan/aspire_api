@@ -30,6 +30,7 @@
     <a href="{{url_for('students.new')}}">Create student</a>
   </nav>
   <!------------------- Flash messages ------------------------------------------->
+  Flash message
   {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class=flashes>
@@ -40,6 +41,7 @@
     {% endif %}
   {% endwith %}
   <!----------------------Error list----------------------------------------------->
+  Error List
   <ul>
     {% for error in errors if errors|length>0 %}
     <li>{{error}}</li>
