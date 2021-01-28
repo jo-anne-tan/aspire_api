@@ -5,4 +5,3 @@ class Subject(BaseModel):
     category = pw.CharField(null=False)
     description = pw.TextField()
 
-    

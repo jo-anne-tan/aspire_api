@@ -1,4 +1,5 @@
 from models.user import User
+from decimal import Decimal
 import peewee as pw
 
 class Student(User):
