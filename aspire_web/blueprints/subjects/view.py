@@ -15,8 +15,6 @@ def create(cat,desc):
         category=cat,
         description=desc
     )
-    
-
 
     if s.save():
         flash("Subject created")
