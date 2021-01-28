@@ -11,6 +11,7 @@ class User(BaseModel,UserMixin):
     is_female = pw.BooleanField(null=False) # True for female, False for male
     email=pw.CharField(null=False, unique=True)
     password=pw.CharField(null=False)
+    profile_image=pw.CharField(default="")
 
     # validations
     def validate(self):

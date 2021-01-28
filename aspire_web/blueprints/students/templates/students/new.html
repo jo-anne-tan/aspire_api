@@ -10,4 +10,27 @@ Create a student account
 {% block content %}
 
 <h1>Create a student account</h1>
+<form action="" methods="POST">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+    <label for="first_name">First name</label>
+    <input type="text" name="first_name" id="first_name">
+    <label for="last_name">Last name</label>
+    <input type="text" name="last_name" id="last_name">
+    <label for="age" id="age" name="age">Age</label>
+    <input type="number" name="age" id="age" min="1" max="130">
+    <br/>
+    Gender
+    <br/>
+
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label><br>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br>
+    <input type="submit" value="Submit">
+    
+</form>
+
 {% endblock %}
