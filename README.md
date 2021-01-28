@@ -13,7 +13,7 @@ endpoints
 | GET /tutor_sessions/me | return current_user tutor sessions |
 
 | endpoints  | ... | requirements |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- |
 | POST /login | returns auth_token | email, password |
 | POST /students | request to sign up new student | email, password |
 | POST /tutors | request to sign up new tutor | email,password |
