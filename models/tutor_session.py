@@ -9,6 +9,7 @@ class Tutor_session(BaseModel):
     # Status = confirmed, cancelled, ended (optional: postponed)
     subject = pw.ForeignKeyField(Subject, backref="tutor_sessions")
     tutor = pw.ForeignKeyField(Tutor, backref="tutor_sessions")
+<<<<<<< HEAD
     title = pw.CharField(null=True)
     price = pw.DecimalField(null=True)
     duration = pw.IntegerField(null=True)
@@ -16,4 +17,13 @@ class Tutor_session(BaseModel):
     end_time=pw.DateTimeField(null=True)
     max_student_capacity=pw.IntegerField(null=True)
     status=pw.CharField(null=True)
+=======
+    title = pw.CharField(null=False)
+    price = pw.DecimalField(null=False)
+    duration = pw.IntegerField(null=False)
+    start_time=pw.DateTimeField(null=False)
+    end_time=pw.DateTimeField(null=False) 
+    max_student_capacity=pw.IntegerField(null=False)
+    status=pw.CharField(null=False) 
+>>>>>>> master
     status_timestamp=pw.DateTimeField(default=datetime.datetime.now)

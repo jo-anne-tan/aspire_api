@@ -5,6 +5,7 @@ from models.base_model import BaseModel
 from werkzeug.security import generate_password_hash
 
 class User(BaseModel,UserMixin):
+<<<<<<< HEAD
     first_name = pw.CharField(null=True)
     last_name = pw.CharField(null=True)
     age = pw.IntegerField(null=True)
@@ -12,6 +13,14 @@ class User(BaseModel,UserMixin):
     email= pw.CharField(null=True, unique=True)
     password= pw.CharField(null=True)
     image_path= pw.CharField(null=True)
+=======
+    first_name = pw.CharField(null=False)
+    last_name = pw.CharField(null=False)
+    age = pw.IntegerField(null=False)
+    is_female = pw.BooleanField(null=False) # True for female, False for male
+    email=pw.CharField(null=False, unique=True)
+    password=pw.CharField(null=False)
+>>>>>>> master
 
     # validations
     def validate(self):
@@ -21,12 +30,6 @@ class User(BaseModel,UserMixin):
             if not (self.password[0:19] == "pbkdf2:sha256:50000"): # if password is not changed
                 self.password_check()
 
-    def duplicate_check(self):
-        duplicate_email =  User.get_or_none(User.email==self.email)
-
-        if duplicate_email:
-            if not duplicate_email.id==self.id: #if the id is not your own
-                self.errors.append("Email is already taken. Please try again.")
 
     def password_check(self):
         error_flag = False
