@@ -5,22 +5,12 @@ from models.base_model import BaseModel
 from werkzeug.security import generate_password_hash
 
 class User(BaseModel,UserMixin):
-<<<<<<< HEAD
-    first_name = pw.CharField(null=True)
-    last_name = pw.CharField(null=True)
-    age = pw.IntegerField(null=True)
-    is_female = pw.BooleanField(null=True) # True for female, False for male
-    email= pw.CharField(null=True, unique=True)
-    password= pw.CharField(null=True)
-    image_path= pw.CharField(null=True)
-=======
     first_name = pw.CharField(null=False)
     last_name = pw.CharField(null=False)
     age = pw.IntegerField(null=False)
     is_female = pw.BooleanField(null=False) # True for female, False for male
     email=pw.CharField(null=False, unique=True)
     password=pw.CharField(null=False)
->>>>>>> master
 
     # validations
     def validate(self):

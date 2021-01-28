@@ -3,9 +3,6 @@ from decimal import Decimal
 import peewee as pw
 
 class Student(User):
-<<<<<<< HEAD
-    rating = pw.DecimalField(default=Decimal(5))
-=======
     rating = pw.DecimalField(default=5)
 
     # validation
@@ -15,4 +12,3 @@ class Student(User):
         if duplicate_email:
             if not duplicate_email.id==self.id: #if the id is not your own
                 self.errors.append("Email is already taken. Please try again.")
->>>>>>> master
