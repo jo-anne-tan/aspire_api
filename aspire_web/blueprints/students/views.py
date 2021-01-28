@@ -1,4 +1,5 @@
 from flask import Blueprint, flash, render_template,request,redirect,url_for,session,abort
+from models.student import Student
 
 students_blueprint = Blueprint('students',
                             __name__,
@@ -9,17 +10,27 @@ students_blueprint = Blueprint('students',
 def new():
     return render_template('students/new.html')
 
-@students_blueprint.route('/create',methods=["POST"])
+@students_blueprint.route('/create', methods=['POST'])
 def create():
+    # request.form["female"] returns True if select,
+    # else it returns error
     try:
-        new_student = Student(
-            first_name=request.forms["first_name"] ,
-            last_name= request.forms["last_name"],
-            age=request.forms["age"],
-            is_female=request.forms["first_name"],
-            email=request.forms["first_name"],
-            password=request.forms["first_name"],
-        )
+        is_female = request.form["female"]
     except:
-        pass
-    pass
+        is_female = False
+
+    new_student = Student(
+        first_name=request.form["first_name"],
+        last_name= request.form["last_name"],
+        age=request.form["age"],
+        is_female= is_female,
+        email=request.form["email"],
+        password=request.form["password"]
+    )
+
+    if new_student.save():
+        flash("Student created!")
+        return redirect(url_for('home'))
+    else:
+        flash("Error creating student!")
+        return render_template('home.html', errors = new_student.errors)
