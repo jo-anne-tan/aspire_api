@@ -2,8 +2,7 @@
 
 endpoints
 
--GET /students
--return all students
+| GET /students | return all students |
 
 -GET /students/id
 -return specific student info
