@@ -2,7 +2,7 @@ from models.user import User
 import peewee as pw
 
 class Student(User):
-    rating = pw.DecimalField(default=0)
+    rating = pw.DecimalField(default=5)
 
     # validation
     def duplicate_check(self):
