@@ -20,7 +20,7 @@ def create():
         is_female = False
 
     new_student = Student(
-        first_name=request.form["first_name"] ,
+        first_name=request.form["first_name"],
         last_name= request.form["last_name"],
         age=request.form["age"],
         is_female= is_female,
