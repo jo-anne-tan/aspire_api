@@ -9,5 +9,3 @@ class Subject(BaseModel):
     def validate(self):
         if Subject.get_or_none(self.category):
             self.errors.append("This category already exists.")
-
-            "added validation for unique subject category, added blueprint to test subject creation"
