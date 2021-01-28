@@ -1,11 +1,11 @@
 from app import app
+from flask import render_template
 from .util.assets import bundles
 from flask_assets import Environment, Bundle
-
 
 assets = Environment(app)
 assets.register(bundles)
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def home():
-    return "ASPIRE WEB FOR API TEST"
+    return render_template('home.html')
