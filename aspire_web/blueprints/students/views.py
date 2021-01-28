@@ -11,15 +11,18 @@ def new():
 
 @students_blueprint.route('/create',methods=["POST"])
 def create():
-    try:
-        new_student = Student(
-            first_name=request.forms["first_name"] ,
-            last_name= request.forms["last_name"],
-            age=request.forms["age"],
-            is_female=request.forms["first_name"],
-            email=request.forms["first_name"],
-            password=request.forms["first_name"],
-        )
-    except:
-        pass
-    pass
+    new_student = Student(
+        first_name=request.forms["first_name"] ,
+        last_name= request.forms["last_name"],
+        age=request.forms["age"],
+        is_female=request.forms["first_name"],
+        email=request.forms["first_name"],
+        password=request.forms["first_name"],
+    )
+
+    if new_student.save():
+        flash("Student created!")
+        return redirect(url_for('home'))
+    else:
+        flash("Error creating student!")
+        return render_template('home', errors = new_student.errors)
