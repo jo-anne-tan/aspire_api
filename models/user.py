@@ -9,8 +9,9 @@ class User(BaseModel,UserMixin):
     last_name = pw.CharField(null=True)
     age = pw.IntegerField(null=True)
     is_female = pw.BooleanField(null=True) # True for female, False for male
-    email=pw.CharField(null=True, unique=True)
-    password=pw.CharField(null=True)
+    email= pw.CharField(null=True, unique=True)
+    password= pw.CharField(null=True)
+    image_path= pw.CharField(null=True)
 
     # validations
     def validate(self):
