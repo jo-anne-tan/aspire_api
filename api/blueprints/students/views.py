@@ -50,3 +50,11 @@ def show_all():
 
     return jsonify(student_data), 200
 
+@students_api_blueprint.route('/<id>', methods=['GET'])
+def show(id):
+    student = Student.get_by_id(id)
+    student_data = model_to_dict(student)
+
+    return jsonify(student_data)
+
+
