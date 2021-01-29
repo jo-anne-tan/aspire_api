@@ -25,7 +25,7 @@ def new():
         token = create_access_token(identity=new_tutor.id)
         responseObject = ({
             "token": token,
-            "message": "Successfully created student and signed in.",
+            "message": "Successfully created tutor and signed in.",
             "status": "success!",
             "student": {
                 "id": new_tutor.id,
