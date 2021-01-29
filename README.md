@@ -15,6 +15,6 @@ endpoints
 | endpoints                | ...                               | requirements                                                                                                          |
 | ------------------------ | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | POST /login              | returns auth_token                | email, password                                                                                                       |
-| POST /students           | request to sign up new student    | email, password                                                                                                       |
-| POST /tutors             | request to sign up new tutor      | email,password                                                                                                        |
+| POST /students           | request to sign up new student    | email, password, first_name, last_name, gender, age                                                                   |
+| POST /tutors             | request to sign up new tutor      | email,password, first_name, last_name, gender, age                                                                    |
 | POST /tutor_sessions/new | request to create a tutor session | Bearer token, tutor_id, subject_id, price, title, max_student_capacity, start_time, end_time, duration, host_zoom_url |

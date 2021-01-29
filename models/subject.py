@@ -7,5 +7,5 @@ class Subject(BaseModel):
 
     #validation
     def validate(self):
-        if Subject.get_or_none(Subject.category == self.category):
-            self.errors.append("This category already exists.")
+        if Subject.get_or_none(Subject.category==self.category):
+                self.errors.append("This category already exists.")
