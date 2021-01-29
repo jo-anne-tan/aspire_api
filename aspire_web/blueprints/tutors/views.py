@@ -12,7 +12,7 @@ def new():
 @tutors_blueprint.route('/create', methods=['POST'])
 def create():
     # Note: request.form["female"] is radio input type
-    # request.form["female"] returns True if select, 
+    # request.form["female"] returns True if select,
     # else it returns error
     try:
         is_female = request.form["female"]

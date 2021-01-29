@@ -32,13 +32,13 @@
   <!------------------- Flash messages ------------------------------------------->
   Flash message
   {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+  {% if messages %}
+  <ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
   {% endwith %}
   <!----------------------Error list----------------------------------------------->
   Error List
@@ -47,7 +47,7 @@
     <li>{{error}}</li>
     {% endfor%}
   </ul>
-  <br/>
+  <br />
 
   {% block content %}
   {% endblock %}

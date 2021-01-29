@@ -12,7 +12,7 @@ def new():
 
 @students_blueprint.route('/create', methods=['POST'])
 def create():
-    # request.form["female"] returns True if select, 
+    # request.form["female"] returns True if select,
     # else it returns error
     try:
         is_female = request.form["female"]
