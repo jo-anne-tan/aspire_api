@@ -17,6 +17,8 @@ class Tutor_session(BaseModel):
     max_student_capacity=pw.IntegerField(null=False)
     status=pw.CharField(null=False,default = "Confirmed")
     status_timestamp=pw.DateTimeField(default=datetime.datetime.now)
+    zoom_host = pw.CharField(null=False)
+    zoom_participant = pw.CharField(null=False)
 
     # WIP : may not require this validation if api for picking meeting time will handle this.
     # To revisit if api cannot handling time conflicts!
