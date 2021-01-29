@@ -9,12 +9,13 @@ subjects_blueprint = Blueprint('subjects',
 def new():
     return render_template('subjects/new.html')
 
-@subjects_blueprint.route('/create/<cat>/<desc>', methods=['POST'])
-def create(cat,desc):
+@subjects_blueprint.route('/create', methods=['POST'])
+def create():
     s = Subject(
-        category=cat,
-        description=desc
+        category=request.form['category']
     )
 
     if s.save():
         flash("Subject created")
+    else:
+        flash("Subject not created", errors = s.errors)
