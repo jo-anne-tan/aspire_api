@@ -13,6 +13,7 @@ class User(BaseModel,UserMixin):
     password=pw.CharField(null=False)
     profile_image=pw.CharField(default="")
     
+    
 
     # validations
     def validate(self):

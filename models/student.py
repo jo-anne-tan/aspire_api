@@ -4,6 +4,7 @@ import peewee as pw
 
 class Student(User):
     rating = pw.DecimalField(default=5)
+    username=pw.CharField(default="")
     # notes=pw.TextField(default="")
 
     # validation

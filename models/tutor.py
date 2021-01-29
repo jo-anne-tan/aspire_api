@@ -4,6 +4,7 @@ import peewee as pw
 
 class Tutor(User):
     rating = pw.DecimalField(default=5)
+    username=pw.CharField(default="")
 
     # validation
     def duplicate_check(self):
