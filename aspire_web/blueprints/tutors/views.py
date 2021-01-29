@@ -5,31 +5,26 @@ tutors_blueprint = Blueprint('tutors',
                             __name__,
                             template_folder='templates')
 
-@tutors_blueprint.route('/new', methods=['GET'])
-def new():
-    return render_template('tutors/new.html')
-
-@tutors_blueprint.route('/create', methods=['POST'])
+@tutors_blueprint.route('/create')
 def create():
-    # Note: request.form["female"] is radio input type
-    # request.form["female"] returns True if select,
-    # else it returns error
-    try:
-        is_female = request.form["female"]
-    except:
-        is_female = False
 
     new_tutor = Tutor(
-        first_name=request.form["first_name"],
-        last_name= request.form["last_name"],
-        age=request.form["age"],
-        is_female= is_female,
-        email=request.form["email"],
-        password=request.form["password"]
+        first_name="Jane",
+        last_name= "Doe",
+        age=34,
+        is_female= True,
+        email= 'ABC4@gmail.com',
+        password='ABC4@gmail.com',
     )
 
     if new_tutor.save():
         flash("Tutor created!")
+        
+        # updating username
+        username = new_tutor.first_name+new_tutor.last_name+str(new_tutor.id)
+        new_tutor.username=username
+        new_tutor.save()
+
         return redirect(url_for('home'))
     else:
         flash("Unable to create Tutor!")

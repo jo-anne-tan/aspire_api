@@ -6,31 +6,27 @@ students_blueprint = Blueprint('students',
                             template_folder='templates')
 
 
-@students_blueprint.route('/new', methods=['GET'])
-def new():
-    return render_template('students/new.html')
-
-@students_blueprint.route('/create', methods=['POST'])
+@students_blueprint.route('/create')
 def create():
-    # request.form["female"] returns True if select,
-    # else it returns error
-    try:
-        is_female = request.form["female"]
-    except:
-        is_female = False
 
     new_student = Student(
-        first_name=request.form["first_name"],
-        last_name= request.form["last_name"],
-        age=request.form["age"],
-        is_female= is_female,
-        email=request.form["email"],
-        password=request.form["password"]
+        first_name="John",
+        last_name= "Dane",
+        age=43,
+        is_female= False,
+        email='AAA1@gmail.com',
+        password='AAA1@gmail.com'
     )
 
     if new_student.save():
         flash("Student created!")
-        return redirect(url_for('home'))
+
+        # updating username
+        username = new_student.first_name+new_student.last_name+str(new_student.id)
+        new_student.username=username
+        new_student.save()
+        
     else:
         flash("Error creating student!")
-        return render_template('home.html', errors = new_student.errors)
+
+    return render_template('home.html', errors = new_student.errors)
