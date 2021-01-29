@@ -40,6 +40,8 @@ def create():
         end_time=end_1,
         max_student_capacity=10,
         status="Confirmed",
+        zoom_host="",
+        zoom_participant=""
     )
 
     if session.save():
