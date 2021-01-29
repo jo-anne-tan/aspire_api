@@ -36,7 +36,7 @@ def new():
         })
         return make_response(jsonify(responseObject)), 201
     else:
-        return jsonify([err for err in new_student.errors])
+        return make_response(jsonify([err for err in new_student.errors])), 400
 
 @students_api_blueprint.route('/', methods=['GET'])
 def show_all():
@@ -48,13 +48,13 @@ def show_all():
         student = model_to_dict(student)
         student_data.append(student)
 
-    return jsonify(student_data), 200
+    return make_response(jsonify(student_data)), 200
 
 @students_api_blueprint.route('/<id>', methods=['GET'])
 def show(id):
     student = Student.get_by_id(id)
     student_data = model_to_dict(student)
 
-    return jsonify(student_data)
+    return make_response(jsonify(student_data)), 200
 
 
