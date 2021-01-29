@@ -1,5 +1,5 @@
-from flask import Blueprint, request, jsonify, abort
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask import Blueprint, request, jsonify, make_response
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from models.student import Student
 from playhouse.shortcuts import model_to_dict
 
@@ -9,27 +9,37 @@ students_api_blueprint = Blueprint('students_api',
 
 
 @students_api_blueprint.route('/', methods=['POST'])
-def create():
+def new():
     params = request.json
-    new_student = Student(first_name=params.get("first_name"), last_name=params.get("last_name"), email=params.get("email"), password=params.get("password"), age=params.get("age"), is_female=params.get("gender"))
+
+    try:
+        new_student = Student(first_name=params.get("first_name"), last_name=params.get("last_name"), email=params.get("email"), password=params.get("password"), age=params.get("age"), is_female=params.get("is_female"))
+    except:
+        responseObject = {
+            'status': 'failed',
+            'message': ['All fields are required!']
+        }
+        return make_response(jsonify(responseObject)), 400
+
     if new_student.save():
         token = create_access_token(identity=new_student.id)
-        return jsonify({
+        responseObject = ({
             "token": token,
             "message": "Successfully created student and signed in.",
-            "status": "success",
+            "status": "success!",
             "student": {
-                "id": Student.id,
-                "name": Student.first_name + Student.last_name,
-                "age": Student.age,
-                "is_female" : Student.is_female
+                "id": new_student.id,
+                "name": new_student.first_name + " " + new_student.last_name,
+                "age": new_student.age,
+                "is_female" : new_student.is_female
             }
         })
+        return make_response(jsonify(responseObject)), 201
     else:
         return jsonify([err for err in new_student.errors])
 
 @students_api_blueprint.route('/', methods=['GET'])
-def show():
+def show_all():
     students = Student.select()
 
     student_data = []
@@ -38,5 +48,5 @@ def show():
         student = model_to_dict(student)
         student_data.append(student)
 
-    # breakpoint()
     return jsonify(student_data), 200
+
