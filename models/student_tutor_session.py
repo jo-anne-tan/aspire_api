@@ -14,3 +14,12 @@ class Student_tutor_session(BaseModel):
     status_timestamp = pw.DateTimeField(default=datetime.datetime.now)
     zoom_host = pw.CharField()
     zoom_participant=pw.CharField()
+
+    # validation section
+    # the same student can only join the same session once
+    def validate(self):
+        my_sessions = Student_tutor_session.select().where(Student_tutor_session.student==self.student)
+
+        for session in my_sessions:
+            if str(session.tutor_session)==str(self.tutor_session):
+                self.errors.append("You have already registered for this session!")
