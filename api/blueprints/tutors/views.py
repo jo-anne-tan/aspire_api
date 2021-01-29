@@ -36,7 +36,7 @@ def new():
         })
         return make_response(jsonify(responseObject)), 201
     else:
-        return jsonify([err for err in new_tutor.errors])
+        return make_response(jsonify([err for err in new_tutor.errors])), 400
 
 @tutors_api_blueprint.route('/', methods=['GET'])
 def show_all():
@@ -48,13 +48,12 @@ def show_all():
         tutor = model_to_dict(tutor)
         tutor_data.append(tutor)
 
-    return jsonify(tutor_data), 200
+    return make_response(jsonify(tutor_data)), 200
 
 @tutors_api_blueprint.route('/<id>', methods=['GET'])
 def show(id):
     tutor = Tutor.get_by_id(id)
     tutor_data = model_to_dict(tutor)
 
-    return jsonify(tutor_data)
-
+    return make_response(jsonify(tutor_data)), 200
 
