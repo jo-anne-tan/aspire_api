@@ -1,10 +1,12 @@
 import os
 import config
-from flask import Flask
 import decimal
 import flask.json
+from flask import Flask
+from flask_wtf import CSRFProtect
+from flask_login import LoginManager
+from flask_jwt_extended import JWTManager
 from models.base_model import db
-
 class MyJSONEncoder(flask.json.JSONEncoder):
 
     def default(self, obj):
@@ -19,6 +21,8 @@ web_dir = os.path.join(os.path.dirname(
 
 app = Flask('Aspire', root_path=web_dir)
 app.json_encoder = MyJSONEncoder
+csrf = CSRFProtect(app)
+jwt = JWTManager(app)
 
 if os.getenv('FLASK_ENV') == 'production':
     app.config.from_object("config.ProductionConfig")
