@@ -85,7 +85,7 @@ def show_me():
 
         return make_response(jsonify(my_tutor_sessions_data)), 200
 
-@student_tutor_sessions_api_blueprint.route('/update', methods = ['POST'])
+@student_tutor_sessions_api_blueprint.route('/update-payment', methods = ['POST'])
 @jwt_required
 def update_payment_status():
     params = request.json
@@ -93,8 +93,8 @@ def update_payment_status():
     student = Student.get_by_id(get_jwt_identity())
     student_tutor_session = Student_tutor_session.get_by_id(params.get('student_tutor_session_id'))
 
-    if student and student_tutor_session and student_tutor_session.status == 'unpaid':
-        student_tutor_sesion.status = 'paid'
+    if student and student_tutor_session.status == 'unpaid':
+        student_tutor_session.status = 'paid'
         student_tutor_session.status_timestamp = datetime.now()
 
     if student_tutor_session.save():

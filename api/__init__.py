@@ -17,4 +17,5 @@ app.register_blueprint(csrf.exempt(tutors_api_blueprint), url_prefix='/api/v1/tu
 app.register_blueprint(csrf.exempt(login_api_blueprint), url_prefix='/api/v1/login')
 app.register_blueprint(csrf.exempt(subjects_api_blueprint), url_prefix='/api/v1/subjects')
 app.register_blueprint(csrf.exempt(tutor_sessions_api_blueprint), url_prefix='/api/v1/tutor_sessions')
+app.register_blueprint(csrf.exempt(student_tutor_sessions_api_blueprint), url_prefix='/api/v1/student_tutor_sessions')
 app.register_blueprint(csrf.exempt(payments_api_blueprint), url_prefix='/api/v1/payments')
