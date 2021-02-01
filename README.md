@@ -12,6 +12,8 @@ endpoints
 | GET /tutors/me         | return current_user for user type tutor   |
 | GET /subjects          | return all subjects                       |
 | GET /subjects/category | return specific subject                   |
+| GET /tutor_sessions/   | return all tutor sessions                 |
+| GET /tutor_sessions/id | return specific tutor sessions            |
 | GET /tutor_sessions/me | return current_user tutor sessions        |
 
 | endpoints                | ...                               | requirements                                                                                                          |
