@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, abort
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from models.tutor import Tutor
 from playhouse.shortcuts import model_to_dict
@@ -57,3 +57,13 @@ def show(id):
 
     return make_response(jsonify(tutor_data)), 200
 
+@tutors_api_blueprint.route('/me', methods=['GET'])
+@jwt_required
+def me():
+    tutor = Tutor.get_by_id(get_jwt_identity())
+    if tutor:
+        tutor_data = model_to_dict(tutor)
+
+        return make_response(jsonify(tutor_data)), 200
+    else:
+        return abort(404)

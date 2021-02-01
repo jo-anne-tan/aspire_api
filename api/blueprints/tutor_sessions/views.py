@@ -52,8 +52,8 @@ def new():
         )
     except:
         responseObject = {
-            'status': 'failed',
-            'message': ['All fields are required!']
+            "status": "failed",
+            "message": ['All fields are required!']
         }
         return make_response(jsonify(responseObject)), 400
 
@@ -65,7 +65,7 @@ def new():
                 "id": new_tutor_session.id,
                 "title": new_tutor_session.title,
                 "subject": new_tutor_session.subject_id,
-                "tutor_id" : new_tutor_session.tutor_id.id,
+                "tutor_id" : new_tutor_session.tutor.id,
                 "duration" : new_tutor_session.duration,
                 "start_time" : new_tutor_session.start_time,
                 "end_time" : new_tutor_session.end_time,
@@ -80,3 +80,58 @@ def new():
         return make_response(jsonify(responseObject)), 201
     else:
         return make_response(jsonify([err for err in new_tutor_session.errors])), 400
+
+
+@tutor_sessions_api_blueprint.route('/<id>/delete', methods=['POST'])
+@jwt_required
+def delete(id):
+    tutor_session = Tutor_session.get_by_id(id)
+    tutor = Tutor.get_by_id(get_jwt_identity())
+
+    if tutor_session:
+        if tutor_session.tutor_id == tutor.id:
+            if tutor_session.delete_instance():
+                responseObject = ({
+                    "message": "Successfully deleted tutor session.",
+                    "status" : "success!"
+                })
+                return make_response(jsonify(responseObject))
+            else:
+                responseObject = {
+                    "status": "failed",
+                    "message": "Deleting tutor session failed."
+                }
+                return make_response(jsonify(responseObject)), 400
+        else:
+            responseObject = ({
+                "message": "No permission to delete tutor session.",
+                "status" : "failed!"
+            })
+            return make_response(jsonify(responseObject)), 403
+    else:
+        responseObject = ({
+            "message": "Tutor session does not exist.",
+            "status" : "failed!"
+        })
+        return make_response(jsonify(responseObject)), 500
+
+
+@tutor_sessions_api_blueprint.route('/', methods=['GET'])
+def show_all():
+    tutor_sessions = Tutor_session.select()
+
+    tutor_sessions_data = []
+
+    for tutor_session in tutor_sessions:
+        tutor_session = model_to_dict(tutor_session)
+        tutor_sessions_data.append(tutor_session)
+
+    return make_response(jsonify(tutor_sessions_data)), 200
+
+@tutor_sessions_api_blueprint.route('/<id>', methods=['GET'])
+def show(id):
+    tutor_session = Tutor_session.get_by_id(id)
+    tutor_session_data = model_to_dict(tutor_session)
+
+    return make_response(jsonify(tutor_session_data)), 200
+
