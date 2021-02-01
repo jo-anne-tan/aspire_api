@@ -29,4 +29,5 @@ endpoints
 | POST /student_tutor_sessions/unenroll | request to unenroll a tutor session | Bearer token, tutor_session_id |
 | POST /student_tutor_sessions/update | request to update payment status | Bearer token, student_tutor_session_id |
 | POST /payments/new | request to save payment transaction | Bearer token, student_tutor_session_id |
+| POST /payments/update | request to update payment transaction | Bearer token, payment_id |
 
