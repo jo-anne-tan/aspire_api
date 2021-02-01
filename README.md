@@ -24,3 +24,6 @@ endpoints
 | POST /tutors             | request to sign up new tutor      | email,password, first_name, last_name, gender, age                                                                    |
 | POST /tutor_sessions/new | request to create a tutor session | Bearer token, tutor_id, subject_id, price, title, max_student_capacity, start_time, end_time, duration, host_zoom_url |
 | POST /tutor_sessions/delete/id | request to delete a tutor session | Bearer token, tutor_id |
+
+| POST /student_tutor_sessions/enroll| request to enroll a tutor session | Bearer token, tutor_session_id |
+| POST /student_tutor_sessions/unenroll| request to unenroll a tutor session | Bearer token, tutor_session_id |
