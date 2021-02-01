@@ -95,7 +95,7 @@ def delete(id):
                     "message": "Successfully deleted tutor session.",
                     "status" : "success!"
                 })
-                return make_response(jsonify(responseObject))
+                return make_response(jsonify(responseObject)), 200
             else:
                 responseObject = {
                     "status": "failed",
@@ -114,6 +114,12 @@ def delete(id):
             "status" : "failed!"
         })
         return make_response(jsonify(responseObject)), 500
+
+# @tutor_sessions_api_blueprint.route('/<id>/update', methods=['POST'])
+# @jwt_required
+# def update(id):
+#     tutor_session = Tutor_session.get_by_id(id)
+#     tutor = Tutor.get_by_id(get_jwt_identity())
 
 
 @tutor_sessions_api_blueprint.route('/', methods=['GET'])

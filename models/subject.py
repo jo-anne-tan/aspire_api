@@ -3,7 +3,6 @@ from models.base_model import BaseModel
 
 class Subject(BaseModel):
     category = pw.CharField(null=False, unique=True)
-    description = pw.TextField(default="")
 
     #validation
     def validate(self):
