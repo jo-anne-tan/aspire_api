@@ -8,7 +8,7 @@ class Tutor_session(BaseModel):
     # Note: Can remove either duration or end time
     # Status = confirmed, cancelled, ended (optional: postponed)
     subject = pw.ForeignKeyField(Subject, backref="tutor_sessions")
-    tutor = pw.ForeignKeyField(Tutor, backref="tutor_sessions")
+    tutor_id = pw.ForeignKeyField(Tutor, backref="tutor_sessions")
     title = pw.CharField(null=False)
     price = pw.DecimalField(null=False)
     duration = pw.IntegerField(null=False)

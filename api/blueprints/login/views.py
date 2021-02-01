@@ -7,7 +7,7 @@ from flask_jwt_extended import jwt_required, create_access_token
 
 
 login_api_blueprint = Blueprint(
-    "sessions_api", __name__, template_folder="templates")
+    "login_api", __name__, template_folder="templates")
 
 @login_api_blueprint.route("/student", methods=["POST"])
 def student_login():
