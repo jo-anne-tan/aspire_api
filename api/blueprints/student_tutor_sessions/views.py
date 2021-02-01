@@ -84,3 +84,28 @@ def show_me():
             my_tutor_sessions_data.append(tutor_session)
 
         return make_response(jsonify(my_tutor_sessions_data)), 200
+
+@student_tutor_sessions_api_blueprint.route('/update', methods = ['POST'])
+@jwt_required
+def update_payment_status():
+    params = request.json
+
+    student = Student.get_by_id(get_jwt_identity())
+    student_tutor_session = Student_tutor_session.get_by_id(params.get('student_tutor_session_id'))
+
+    if student and student_tutor_session and student_tutor_session.status == 'unpaid':
+        student_tutor_sesion.status = 'paid'
+        student_tutor_session.status_timestamp = datetime.now()
+
+    if student_tutor_session.save():
+        responseObject = ({
+            "message" : "Succesfully update payment status.",
+            "status" : "success!",
+            "student_tutor_session" : {
+                "id" : student_tutor_session.id
+            }
+        })
+        return make_response(jsonify(responseObject)), 200
+    else:
+        return make_response(jsonify([err for err in student_tutor_session.errors])), 400
+
