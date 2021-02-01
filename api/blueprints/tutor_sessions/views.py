@@ -141,3 +141,18 @@ def show(id):
 
     return make_response(jsonify(tutor_session_data)), 200
 
+@tutor_sessions_api_blueprint.route('/me', methods=['GET'])
+@jwt_required
+def show_me():
+    tutor = Tutor.get_by_id(get_jwt_identity())
+
+    if tutor:
+        my_tutor_sessions = Tutor_session.select().where(Tutor_session.tutor_id == tutor.id)
+
+        my_tutor_sessions_data = []
+
+        for tutor_session in my_tutor_sessions:
+            tutor_session = model_to_dict(tutor_session)
+            my_tutor_sessions_data.append(tutor_session)
+
+        return make_response(jsonify(my_tutor_sessions_data)), 200
