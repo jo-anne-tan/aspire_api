@@ -21,5 +21,5 @@ class Student_tutor_session(BaseModel):
         my_sessions = Student_tutor_session.select().where(Student_tutor_session.student==self.student)
 
         for session in my_sessions:
-            if str(session.tutor_session)==str(self.tutor_session):
+            if str(session.tutor_session) == str(self.tutor_session) and self.status == 'unpaid':
                 self.errors.append("You have already registered for this session!")
