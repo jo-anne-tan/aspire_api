@@ -67,3 +67,20 @@ def unenroll():
             "message": "Unenroll tutor session failed."
         }
         return make_response(jsonify(responseObject)), 400
+
+
+@student_tutor_sessions_api_blueprint.route('/me', methods=['GET'])
+@jwt_required
+def show_me():
+    student = Student.get_by_id(get_jwt_identity())
+
+    if student:
+        my_tutor_sessions = Student_tutor_session.select().where(Student_tutor_session.student_id == student.id)
+
+        my_tutor_sessions_data = []
+
+        for tutor_session in my_tutor_sessions:
+            tutor_session = model_to_dict(tutor_session)
+            my_tutor_sessions_data.append(tutor_session)
+
+        return make_response(jsonify(my_tutor_sessions_data)), 200
