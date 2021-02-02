@@ -1,7 +1,7 @@
 import json
 from models.tutor import Tutor
 from models.student import Student
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Blueprint, jsonify, request, make_response
 from flask_jwt_extended import jwt_required, create_access_token
 
@@ -17,9 +17,13 @@ def student_login():
     password = params['password']
 
     try:
-        user = Student.get_or_none(email=email)
+        user = Student.get_or_none(email = email)
 
-        if user and check_password_hash(user.password, params.get("password")):
+        print(user, email, password)
+        print(user.password)
+        print(check_password_hash(user.password, password))
+
+        if user and check_password_hash(user.password, password):
             token = create_access_token(identity=user.id)
 
             responseObject = {
@@ -34,7 +38,7 @@ def student_login():
         else:
             response_object = {
                 'status': 'error',
-                'message': 'Wrong password or username. Try again.'
+                'message': 'Wrong password or email. Try again.'
             }
             return jsonify(response_object), 404
 
@@ -71,7 +75,7 @@ def tutor_login():
         else:
             response_object = {
                 'status': 'error',
-                'message': 'Wrong password or username. Try again.'
+                'message': 'Wrong password or email. Try again.'
             }
             return jsonify(response_object), 404
 
