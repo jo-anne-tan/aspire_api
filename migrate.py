@@ -17,3 +17,18 @@ if os.getenv('FLASK_ENV') == 'production':
 else:
     db.evolve(ignore_tables={'base_model'})
 print("Finish Migration")
+
+
+from models.subject import Subject
+exist_subjects = Subject.select()
+print("Setting Preset Subjects")
+if not len(exist_subjects):
+    presets =["Language", "Mathematics","Coding", "Accounting", "Life Skills"]
+    for p in presets:
+        subject = Subject(category=p)
+        print(subject)
+        if subject.save():
+            print(f"Subject {p} saved.")
+        else:
+            print(f"Unable to create subject {p}.")
+print("Finish Setting Up Preset Subjects")
