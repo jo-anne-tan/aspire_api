@@ -1,7 +1,11 @@
+from app import app
 from flask import Blueprint, request, jsonify, make_response, abort
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from models.tutor import Tutor
 from playhouse.shortcuts import model_to_dict
+from api.util.helpers import upload_file_to_s3
+from werkzeug.utils import secure_filename
+
 
 tutors_api_blueprint = Blueprint('tutor_api',
                              __name__,
@@ -23,11 +27,14 @@ def new():
 
     if new_tutor.save():
         token = create_access_token(identity=new_tutor.id)
+        username = new_tutor.first_name.lower() + new_tutor.last_name.lower() + str(new_tutor.id)
+        new_tutor.username = username
+        new_tutor.save(only=[Tutor.username])
         responseObject = ({
             "token": token,
             "message": "Successfully created tutor and signed in.",
             "status": "success!",
-            "student": {
+            "tutor": {
                 "id": new_tutor.id,
                 "name": new_tutor.first_name + " " + new_tutor.last_name,
                 "age": new_tutor.age,
@@ -67,3 +74,26 @@ def me():
         return make_response(jsonify(tutor_data)), 200
     else:
         return abort(404)
+
+@tutors_api_blueprint.route('/update-profile-picture', methods=['POST'])
+@jwt_required
+def update_profile_picture():
+    tutor = Tutor.get_by_id(get_jwt_identity())
+
+    file = request.files['profile_image']
+    file.filename = secure_filename(file.filename)
+    image_path = upload_file_to_s3(file, "tutor", tutor.username)
+
+    tutor.profile_image = image_path
+
+    if tutor.save():
+        objectResponse = ({
+            "message": "Succesfully updated profile image.",
+            "status" : "success!",
+            "image"  : {
+                "url" : f"{app.config.get('S3_LOCATION')}{image_path}"
+            }
+        })
+        return make_response(jsonify(objectResponse)), 200
+    else:
+        return make_response(jsonify([err for err in tutor.errors])), 400

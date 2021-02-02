@@ -44,7 +44,7 @@ def upload_profile():
 
 @tutors_blueprint.route('/profile-photo', methods=['POST'])
 def upload():
-    tutor = Tutor.get_by_id(10) #hard coded for testing purposes
+    tutor = Tutor.get_by_id(2) #hard coded for testing purposes
 
     s3 = boto3.client(
         's3',

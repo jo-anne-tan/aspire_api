@@ -13,7 +13,7 @@ student_tutor_sessions_blueprint = Blueprint('student_tutor_sessions',
 def create():
     student = Student.get_by_id(2)
     tutor_session=Tutor_session.get_by_id(7)
-    
+
     new_participant = Student_tutor_session(
         student=student,
         tutor_session=tutor_session,

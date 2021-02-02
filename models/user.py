@@ -38,7 +38,5 @@ class User(BaseModel,UserMixin):
             self.errors.append("Password must have an uppercase letter, lowercase letter and at least one special character")
             error_flag = True
 
-        if (self.password[0:19] == "pbkdf2:sha256:50000"): # hashed password
-            pass
-        else:
+        if special_char and lowercase and uppercase and number:
             self.password = generate_password_hash(self.password)
