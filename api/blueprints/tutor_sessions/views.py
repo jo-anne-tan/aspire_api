@@ -156,3 +156,25 @@ def show_me():
             my_tutor_sessions_data.append(tutor_session)
 
         return make_response(jsonify(my_tutor_sessions_data)), 200
+
+@tutor_sessions_api_blueprint.route('/tutor/<id>', methods=['GET'])
+def show_tutor_tutorsesions(id):
+    tutor = Tutor.get_by_id(id)
+
+    if tutor:
+        tutor_sessions = Tutor_session.select().where(Tutor_session.tutor_id == tutor.id)
+
+        tutor_sessions_data = []
+
+        for tutor_session in tutor_sessions:
+            tutor_session = model_to_dict(tutor_session)
+            tutor_sessions_data.append(tutor_session)
+
+        return make_response(jsonify(tutor_sessions_data)), 200
+    else:
+        objectResponse = ({
+            "message" : "Tutor does not exist.",
+            "status" : "erroe!"
+        })
+        return make_response(jsonify(objectResponse)), 404
+

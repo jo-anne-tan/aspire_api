@@ -16,7 +16,6 @@ if not len(exist_subjects):
     presets =["Language", "Mathematics","Coding", "Accounting", "Life Skills"]
     for p in presets:
         subject = Subject(category=p)
-        print(subject)
         if subject.save():
             print(f"Subject {p} saved.")
         else:

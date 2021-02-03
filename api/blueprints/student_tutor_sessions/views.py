@@ -109,3 +109,23 @@ def update_payment_status():
     else:
         return make_response(jsonify([err for err in student_tutor_session.errors])), 400
 
+@student_tutor_sessions_api_blueprint.route('/student/<id>', methods=['GET'])
+def show_student_tutorsesions(id):
+    student = Student.get_by_id(id)
+
+    if student:
+        student_tutor_sessions = Student_tutor_session.select().where(Student_tutor_session.student_id == student.id)
+
+        tutor_sessions_data = []
+
+        for tutor_session in student_tutor_sessions:
+            tutor_session = model_to_dict(tutor_session)
+            tutor_sessions_data.append(tutor_session)
+
+        return make_response(jsonify(tutor_sessions_data)), 200
+    else:
+        objectResponse = ({
+            "message" : "Tutor does not exist.",
+            "status" : "erroe!"
+        })
+        return make_response(jsonify(objectResponse)), 404
