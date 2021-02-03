@@ -15,7 +15,9 @@ endpoints
 | GET /tutor_sessions/   | return all tutor sessions                 |
 | GET /tutor_sessions/id | return specific tutor sessions            |
 | GET /tutor_sessions/me | return tutor's tutor sessions, requires bearer token             |
+| GET /tutor_sessions/tutor/id | return tutor's tutor sessions, requires tutor id             |
 | GET /student_tutor_sessions/me | return student's tutor sessions, requires bearer token             |
+| GET /student_tutor_sessions/student/id | return student's tutor sessions, requires student id            |
 
 | endpoints                | ...                               | requirements                                                                                                          |
 | ------------------------ | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
