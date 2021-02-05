@@ -5,6 +5,7 @@ from models.tutor import Tutor
 from playhouse.shortcuts import model_to_dict
 from api.util.helpers import upload_file_to_s3
 from werkzeug.utils import secure_filename
+import time
 
 
 tutors_api_blueprint = Blueprint('tutor_api',
@@ -94,6 +95,7 @@ def update_profile_picture():
                 "url" : f"{app.config.get('S3_LOCATION')}{image_path}"
             }
         })
+        time.sleep(3)
         return make_response(jsonify(objectResponse)), 200
     else:
         return make_response(jsonify([err for err in tutor.errors])), 400
