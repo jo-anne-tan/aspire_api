@@ -24,6 +24,7 @@ def new():
             title = params.get('title'),
             price = params.get('price'),
             duration = params.get('duration'),
+            description = params.get('description'),
             start_time =
             (
                     datetime(
@@ -64,6 +65,7 @@ def new():
             "session": {
                 "id": new_tutor_session.id,
                 "title": new_tutor_session.title,
+                "description": new_tutor_session.description,
                 "subject": new_tutor_session.subject_id,
                 "tutor_id" : new_tutor_session.tutor.id,
                 "duration" : new_tutor_session.duration,

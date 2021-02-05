@@ -5,6 +5,7 @@ from playhouse.shortcuts import model_to_dict
 from api.util.helpers import upload_file_to_s3
 from flask import Blueprint, request, jsonify, make_response, abort
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+import time
 
 
 students_api_blueprint = Blueprint('students_api',
@@ -96,7 +97,7 @@ def update_profile_picture():
                 "url" : f"{app.config.get('S3_LOCATION')}{image_path}"
             }
         })
-        time.sleep(3)
+        time.sleep(10)
         return make_response(jsonify(objectResponse)), 200
     else:
         return make_response(jsonify([err for err in student.errors])), 400
