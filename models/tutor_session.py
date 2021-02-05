@@ -9,7 +9,7 @@ class Tutor_session(BaseModel):
     # Status = confirmed, cancelled, ended (optional: postponed)
     subject = pw.ForeignKeyField(Subject, backref="tutor_sessions")
     tutor = pw.ForeignKeyField(Tutor, backref="tutor_sessions")
-    description = pw.TextField
+    description = pw.TextField(default="")
     title = pw.CharField(null=False)
     price = pw.DecimalField(null=False)
     duration = pw.IntegerField(null=False)

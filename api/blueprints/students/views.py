@@ -78,7 +78,7 @@ def me():
     else:
         return abort(404)
 
-@students_api_blueprint.route('/update-profile-picture', methods=['POST'])
+@students_api_blueprint.route('/update-profile-image', methods=['POST'])
 @jwt_required
 def update_profile_picture():
     student = Student.get_by_id(get_jwt_identity())
@@ -97,7 +97,6 @@ def update_profile_picture():
                 "url" : f"{app.config.get('S3_LOCATION')}{image_path}"
             }
         })
-        time.sleep(100)
         return make_response(jsonify(objectResponse)), 200
     else:
         return make_response(jsonify([err for err in student.errors])), 400
