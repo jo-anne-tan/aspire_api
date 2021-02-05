@@ -97,7 +97,7 @@ def update_profile_picture():
                 "url" : f"{app.config.get('S3_LOCATION')}{image_path}"
             }
         })
-        time.sleep(10)
+        time.sleep(100)
         return make_response(jsonify(objectResponse)), 200
     else:
         return make_response(jsonify([err for err in student.errors])), 400
