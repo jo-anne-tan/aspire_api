@@ -89,7 +89,7 @@ def update_profile_picture():
 
     student.profile_image = image_path
 
-    if student.save():
+    if student.save(only=[Student.profile_image]):
         objectResponse = ({
             "message": "Succesfully updated profile image.",
             "status" : "success!",

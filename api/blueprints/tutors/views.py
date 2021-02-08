@@ -87,7 +87,7 @@ def update_profile_picture():
 
     tutor.profile_image = image_path
 
-    if tutor.save():
+    if tutor.save(only=[Tutor.profile_image]):
         objectResponse = ({
             "message": "Succesfully updated profile image.",
             "status" : "success!",
