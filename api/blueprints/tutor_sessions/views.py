@@ -67,7 +67,6 @@ def new():
                 "description": new_tutor_session.description,
                 "subject": new_tutor_session.subject_id,
                 "tutor_id" : new_tutor_session.tutor.id,
-                "duration" : new_tutor_session.duration,
                 "start_time" : new_tutor_session.start_time,
                 "end_time" : new_tutor_session.end_time,
                 "max_student_capacity" : new_tutor_session.max_student_capacity,
