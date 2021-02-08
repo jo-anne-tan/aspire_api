@@ -23,7 +23,6 @@ def new():
             tutor_id = tutor.id,
             title = params.get('title'),
             price = params.get('price'),
-            duration = params.get('duration'),
             description = params.get('description'),
             start_time =
             (

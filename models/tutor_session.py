@@ -12,7 +12,6 @@ class Tutor_session(BaseModel):
     description = pw.TextField(default="")
     title = pw.CharField(null=False)
     price = pw.DecimalField(null=False)
-    duration = pw.CharField(null=False)
     start_time=pw.DateTimeField(null=False)
     end_time=pw.DateTimeField(null=False)
     max_student_capacity=pw.IntegerField(null=False)
