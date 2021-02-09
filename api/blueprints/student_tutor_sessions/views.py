@@ -30,6 +30,7 @@ def enroll():
         responseObject = ({
             "message": "Successfully enroll student.",
             "status": "success!",
+            "student_tutor_session_id" : new_participant.id,
             "student": {
                 "id": new_participant.student.id,
                 "name": new_participant.student.first_name + " " + new_participant.student.last_name,
