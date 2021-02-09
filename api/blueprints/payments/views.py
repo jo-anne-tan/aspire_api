@@ -21,8 +21,9 @@ def new():
     if student:
         student_tutor_session = Student_tutor_session.get_by_id(params.get("student_tutor_session"))
         tutor_session =  Tutor_session.get_by_id(student_tutor_session.tutor_session_id)
-        duration = tutor_session.duration
-        amount = tutor_session.price * duration # price per hour * hrs
+        # duration = tutor_session.duration
+        # amount = tutor_session.price * duration # price per hour * hrs
+        amount = tutor_session.price
 
         new_payment = Payment(
             student_tutor_session_id = student_tutor_session.id,
