@@ -55,7 +55,7 @@ def unenroll():
     if student:
         student_tutor_session = Student_tutor_session.get(Student_tutor_session.tutor_session_id == tutor_session.id)
 
-    if student_tutor_session.delete_instance():
+    if student_tutor_session.delete_instance(recursive=True):
         responseObject = ({
             "message": "Successfully uneroll tutor session.",
             "status" : "success!"
