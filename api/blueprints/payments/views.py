@@ -28,14 +28,14 @@ def new():
         new_payment = Payment(
             student_tutor_session_id = student_tutor_session.id,
             amount = amount,
-            status = 'pending',
+            status = 'complete',
             status_timestamp = datetime.now()
         )
 
     if new_payment.save():
         responseObject = (
             {
-                "message" : "Payment saved." ,
+                "message" : "Payment completed." ,
                 "status" : "success!",
                 "payment" : {
                     "id" : new_payment.id,
