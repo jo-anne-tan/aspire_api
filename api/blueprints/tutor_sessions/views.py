@@ -47,8 +47,8 @@ def new():
             max_student_capacity = params.get('max_student_capacity'),
             status ="Confirmed",
             status_timestamp = datetime.now(),
-            zoom_host = "",
-            zoom_participant = ""
+            zoom_host = params.get('zoom_host'),
+            zoom_participant = params.get('zoom_participant')
         )
     except:
         responseObject = {
