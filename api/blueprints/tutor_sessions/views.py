@@ -90,7 +90,7 @@ def delete(id):
 
     if tutor_session:
         if tutor_session.tutor_id == tutor.id:
-            if tutor_session.delete_instance():
+            if tutor_session.delete_instance(recursive=True):
                 responseObject = ({
                     "message": "Successfully deleted tutor session.",
                     "status" : "success!"
